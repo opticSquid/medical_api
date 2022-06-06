@@ -1,25 +1,30 @@
 package com.sb.projects.java.spring.medical_api.entities;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
-@Table(name = "doctors")
-public class Doctor {
+public class Doctors {
     @Id
-    private int id;
+    @NotNull
+    private int doc_id;
     private String name;
     private String email;
     private String degree;
     private String specialization;
+    @OneToMany
+    private List<Patients> patients;
 
-    public int getId() {
-        return id;
+    public int getDoc_id() {
+        return doc_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDoc_id(int doc_id) {
+        this.doc_id = doc_id;
     }
 
     public String getName() {
@@ -52,5 +57,13 @@ public class Doctor {
 
     public void setSpecialization(String specialization) {
         this.specialization = specialization;
+    }
+
+    public List<Patients> getPatients() {
+        return patients;
+    }
+
+    public void setPatients(List<Patients> patients) {
+        this.patients = patients;
     }
 }
