@@ -7,12 +7,13 @@ import javax.persistence.*;
 @Entity
 public class Patients {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
     private int p_id;
     private String name;
     private String email;
     private String contact_no;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private Doctors doctor;
 
     public int getP_id() {

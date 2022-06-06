@@ -2,29 +2,28 @@ package com.sb.projects.java.spring.medical_api.entities;
 
 import com.sun.istack.NotNull;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class Doctors {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
-    private int doc_id;
+    private int d_id;
     private String name;
     private String email;
     private String degree;
     private String specialization;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<Patients> patients;
 
-    public int getDoc_id() {
-        return doc_id;
+    public int getD_id() {
+        return d_id;
     }
 
-    public void setDoc_id(int doc_id) {
-        this.doc_id = doc_id;
+    public void setD_id(int doc_id) {
+        this.d_id = doc_id;
     }
 
     public String getName() {
