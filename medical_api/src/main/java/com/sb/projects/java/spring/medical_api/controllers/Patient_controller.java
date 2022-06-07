@@ -11,7 +11,7 @@ import java.util.Optional;
 @RequestMapping("/patients")
 public class Patient_controller {
     @Autowired
-    Patient_repo patient_repo;
+    private Patient_repo patient_repo;
 
     @GetMapping
     public Iterable<Patients> getPatients() {
