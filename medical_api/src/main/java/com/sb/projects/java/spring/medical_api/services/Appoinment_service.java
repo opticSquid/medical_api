@@ -17,8 +17,10 @@ public class Appoinment_service {
     @Autowired
     private Doctor_repo doctor_repo;
 
-    private Doctors setup_Doctor(Patients patient) {
+    public Patients create_appoinment(Patients patient) {
+        System.out.println("Incoming Patient: \n" + patient);
         Doctors doctor = patient.getDoctor();
+        //Setting/Appending the list of patients in doctor entity
         List<Patients> patientList = doctor.getPatients() != null ? doctor.getPatients() : new ArrayList<>();
         Patients patient_tobe_added = new Patients();
         patient_tobe_added.setP_id(patient.getP_id());
@@ -28,22 +30,11 @@ public class Appoinment_service {
         patientList.add(patient_tobe_added);
         doctor.setPatients(patientList);
         System.out.println("Outging Doctor: \n" + doctor);
-        return doctor;
-    }
-    //Working
-    private Patients setup_Patient(Patients patient) {
-        Doctors doctor_patient = patient.getDoctor();
-        doctor_patient.setPatients(null);
-        patient.setDoctor(doctor_patient);
-        System.out.println("Outging Patient: \n" + patient);
-        return patient;
-    }
-    public Patients create_appoinment(Patients patient) {
-        System.out.println("Incoming Patient: \n" + patient);
-        Doctors doctor = setup_Doctor(patient);
         doctor_repo.save(doctor);
-        Patients patient_final = setup_Patient(patient);
-        patient_repo.save(patient_final);
-        return patient;
+//        Doctors doctor_patient = patient.getDoctor();
+//        doctor_patient.setPatients(null);
+//        patient.setDoctor(doctor_patient);
+        System.out.println("Outging Patient: \n" + patient);
+        return patient_repo.save(patient);
     }
 }
