@@ -3,6 +3,7 @@ package com.sb.projects.java.spring.medical_api.entities;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,6 +16,7 @@ public class Doctors {
     private String email;
     private String degree;
     private String specialization;
+
     @OneToMany(cascade = {CascadeType.ALL})
     private List<Patients> patients;
 
@@ -64,5 +66,18 @@ public class Doctors {
 
     public void setPatients(List<Patients> patients) {
         this.patients = patients;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Doctors{" +
+                "d_id=" + d_id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", degree='" + degree + '\'' +
+                ", specialization='" + specialization + '\'' +
+                ", patients=" + patients +
+                '}';
     }
 }

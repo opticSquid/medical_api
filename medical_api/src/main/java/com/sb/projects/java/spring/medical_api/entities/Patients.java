@@ -57,4 +57,14 @@ public class Patients {
     }
 
 
+    @Override
+    public String toString() {
+        return "Patients{" +
+                "p_id=" + p_id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", contact_no='" + contact_no + '\'' +
+                ", doctor=" + doctor +
+                '}';
+    }
 }
