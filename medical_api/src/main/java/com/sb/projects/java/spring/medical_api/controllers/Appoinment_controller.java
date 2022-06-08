@@ -16,6 +16,6 @@ public class Appoinment_controller {
 
     @PostMapping("/add")
     public Patients addAppoinment(@RequestBody Patients patient) {
-        return appoinment_service.create_appoinment(patient);
+        return patient;
     }
 }

@@ -13,8 +13,6 @@ public class Patients {
     private String name;
     private String email;
     private String contact_no;
-    @OneToOne(cascade = {CascadeType.ALL})
-    private Doctors doctor;
 
     public int getP_id() {
         return p_id;
@@ -48,14 +46,6 @@ public class Patients {
         this.contact_no = contact_no;
     }
 
-    public Doctors getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctors doctor) {
-        this.doctor = doctor;
-    }
-
 
     @Override
     public String toString() {
@@ -64,7 +54,6 @@ public class Patients {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", contact_no='" + contact_no + '\'' +
-                ", doctor=" + doctor +
                 '}';
     }
 }
