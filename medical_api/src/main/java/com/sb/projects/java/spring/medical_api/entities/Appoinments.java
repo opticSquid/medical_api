@@ -12,8 +12,8 @@ public class Appoinments {
     @JoinColumn(name = "doctor_d_id")
     private Doctors doctor;
     @ManyToOne
-    @JoinColumn(name = "patients_p_id")
-    private Patients patients;
+    @JoinColumn(name = "patient_p_id")
+    private Patients patient;
 
     private LocalDateTime time;
 
@@ -25,12 +25,12 @@ public class Appoinments {
         this.apmnt_id = apmnt_id;
     }
 
-    public Patients getPatients() {
-        return patients;
+    public Patients getPatient() {
+        return patient;
     }
 
-    public void setPatients(Patients patients) {
-        this.patients = patients;
+    public void setPatient(Patients patient) {
+        this.patient = patient;
     }
 
     public Doctors getDoctor() {
@@ -46,7 +46,18 @@ public class Appoinments {
         return time;
     }
 
-    public void setTime() {
-        this.time = LocalDateTime.now();
+    public void setTime(LocalDateTime time) {
+
+        this.time = time == null ? LocalDateTime.now() : time;
+    }
+
+    @Override
+    public String toString() {
+        return "Appoinments{" +
+                "apmnt_id=" + apmnt_id +
+                ", doctor=" + doctor +
+                ", patient=" + patient +
+                ", time=" + time +
+                '}';
     }
 }
