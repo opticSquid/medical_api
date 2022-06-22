@@ -19,18 +19,18 @@ public class Patient_controller {
     }
 
     @GetMapping("/{id}")
-    public Patients getPatientsById(@PathVariable("id") int id) {
+    public Patients getPatientsById(@PathVariable("id") Integer id) {
         Optional<Patients> patient_optional = patient_repo.findById(id);
         return patient_optional.orElse(null);
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    @PostMapping(value = "/new")
     public Patients registerNewPatient(@RequestBody Patients patient) {
         return patient_repo.save(patient);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
-    public Patients updatePatientDetails(@PathVariable("id") int id, @RequestBody Patients patient) {
+    @PatchMapping(value = "/update/{id}")
+    public Patients updatePatientDetails(@PathVariable("id") Integer id, @RequestBody Patients patient) {
         Optional<Patients> patient_optional = patient_repo.findById(id);
         if (patient_optional.orElse(null) != null) {
             return patient_repo.save(patient);
@@ -39,8 +39,8 @@ public class Patient_controller {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public void deletePatient(@PathVariable("id") int id) {
+    @DeleteMapping("/delete/{id}")
+    public void deletePatient(@PathVariable("id") Integer id) {
         patient_repo.deleteById(id);
     }
 }

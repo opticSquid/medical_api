@@ -19,7 +19,7 @@ public class Doctor_controller {
     }
 
     @GetMapping("/{id}")
-    public Doctors getDoctorById(@PathVariable("id") int id) {
+    public Doctors getDoctorById(@PathVariable("id") Integer id) {
         Optional<Doctors> doctor_optional = doctor_repo.findById(id);
         return doctor_optional.orElse(null);
         // Above line is the one liner for the lines below
@@ -30,13 +30,13 @@ public class Doctor_controller {
 //        }
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    @PostMapping(value = "/new")
     public Doctors registerNewDoctor(@RequestBody Doctors doctor) {
         return doctor_repo.save(doctor);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
-    public Doctors updateDoctorDetails(@PathVariable("id") int id, @RequestBody Doctors doctor) {
+    @PatchMapping(value = "/update/{id}")
+    public Doctors updateDoctorDetails(@PathVariable("id") Integer id, @RequestBody Doctors doctor) {
         Optional<Doctors> doctor_optional = doctor_repo.findById(id);
         if (doctor_optional.orElse(null) != null) {
             return doctor_repo.save(doctor);
@@ -45,8 +45,8 @@ public class Doctor_controller {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteDoctor(@PathVariable("id") int id) {
+    @DeleteMapping("/delete/{id}")
+    public void deleteDoctor(@PathVariable("id") Integer id) {
         doctor_repo.deleteById(id);
     }
 }
