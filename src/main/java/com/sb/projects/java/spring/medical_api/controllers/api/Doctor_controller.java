@@ -3,6 +3,7 @@ package com.sb.projects.java.spring.medical_api.controllers.api;
 import com.sb.projects.java.spring.medical_api.entities.Doctors;
 import com.sb.projects.java.spring.medical_api.repos.Doctor_repo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -22,15 +23,15 @@ public class Doctor_controller {
     }
 
     @GetMapping("/{id}")
-    public Doctors getDoctorById(@PathVariable("id") Integer id) {
+    public ResponseEntity<Doctors> getDoctorById(@PathVariable("id") Integer id) {
         Optional<Doctors> doctor_optional = doctor_repo.findById(id);
-        return doctor_optional.orElse(null);
-        // Above line is the one liner for the lines below
-//        if(doctor_optional.isPresent()) {
-//            return doctor_optional.get();
-//        } else {
-//            return null;
-//        }
+        Doctors doctor = doctor_optional.orElse(null);
+        if(doctor!=null) {
+            return new ResponseEntity<>(doctor, HttpStatus.OK);
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping(value = "/new")
@@ -56,7 +57,7 @@ public class Doctor_controller {
             doctor_repo.deleteById(id);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.notFound().build();
         }
     }
 }

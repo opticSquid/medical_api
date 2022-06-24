@@ -3,6 +3,7 @@ package com.sb.projects.java.spring.medical_api.controllers.api;
 import com.sb.projects.java.spring.medical_api.entities.Appointments;
 import com.sb.projects.java.spring.medical_api.repos.Appointment_repo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -22,9 +23,14 @@ public class Appointment_controller {
     }
 
     @GetMapping("/{id}")
-    public Appointments getAppointmentById(@PathVariable("id") Integer id) {
+    public ResponseEntity<Appointments> getAppointmentById(@PathVariable("id") Integer id) {
         Optional<Appointments> appointments_Optional = appointment_repo.findById(id);
-        return appointments_Optional.orElse(null);
+        Appointments appointment =appointments_Optional.orElse(null);
+        if(appointment!=null) {
+            return new ResponseEntity<>(appointment, HttpStatus.OK);
+        }else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping("/new")
@@ -52,7 +58,7 @@ public class Appointment_controller {
             appointment_repo.deleteById(id);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.notFound().build();
         }
     }
 }

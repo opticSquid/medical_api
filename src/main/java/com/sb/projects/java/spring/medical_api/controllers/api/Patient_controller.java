@@ -3,6 +3,7 @@ package com.sb.projects.java.spring.medical_api.controllers.api;
 import com.sb.projects.java.spring.medical_api.entities.Patients;
 import com.sb.projects.java.spring.medical_api.repos.Patient_repo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -22,9 +23,14 @@ public class Patient_controller {
     }
 
     @GetMapping("/{id}")
-    public Patients getPatientsById(@PathVariable("id") Integer id) {
+    public ResponseEntity<Patients> getPatientsById(@PathVariable("id") Integer id) {
         Optional<Patients> patient_optional = patient_repo.findById(id);
-        return patient_optional.orElse(null);
+        Patients patient=patient_optional.orElse(null);
+        if(patient!=null) {
+            return new ResponseEntity<>(patient, HttpStatus.OK);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping(value = "/new")
@@ -52,7 +58,7 @@ public class Patient_controller {
             patient_repo.deleteById(id);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.notFound().build();
         }
     }
 }
