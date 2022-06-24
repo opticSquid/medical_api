@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class DoctorController {
     @RequestMapping(value = "/doctors", method = RequestMethod.GET)
-    public String DoctorController(ModelMap model){
+    public String doctorController(ModelMap model){
         model.put("title","Doctors");
-
         return "doctors";
     }
 }

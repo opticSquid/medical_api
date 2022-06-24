@@ -10,6 +10,7 @@
 <%@include file="commons/head.jspf" %>
 <%@include file="commons/navbar.jspf" %>
 <main>
-<h1>hello</h1>
+    <h1>hello</h1>
 </main>
 <%@include file="commons/foorter.jspf" %>
+</html>
