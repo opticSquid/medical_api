@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/patients")
-public class Patient_controller {
+public class Patient_REST_controller {
     @Autowired
     private Patient_repo patient_repo;
 

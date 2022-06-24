@@ -3,3 +3,8 @@
     background-size: cover;
     background-repeat: no-repeat;
 }
+#jumbotron2 {
+    background-image:radial-gradient( rgba(0,0,0,0), rgba(0,0,0,0.5) ), url("jumbotron-doctor.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}

@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/appointments")
-public class Appointment_controller {
+public class Appointment_REST_controller {
     @Autowired
     private Appointment_repo appointment_repo;
 
