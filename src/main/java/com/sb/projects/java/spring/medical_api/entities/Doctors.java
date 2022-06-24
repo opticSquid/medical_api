@@ -3,6 +3,8 @@ package com.sb.projects.java.spring.medical_api.entities;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -11,9 +13,12 @@ public class Doctors {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
     private int d_id;
+    @Size(min=6,message = "Name should be at least 6 characters long")
     private String name;
     private String email;
+    @NotBlank
     private String degree;
+    @NotBlank
     private String specialization;
 
 
