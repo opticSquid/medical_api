@@ -11,7 +11,7 @@ import java.net.URI;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/appointments")
+@RequestMapping("/api/appointments")
 public class Appointment_controller {
     @Autowired
     private Appointment_repo appointment_repo;
@@ -30,7 +30,7 @@ public class Appointment_controller {
     @PostMapping("/new")
     public ResponseEntity<Appointments> addAppointment(@RequestBody Appointments appointment) {
         Appointments new_appointment = appointment_repo.save(appointment);
-        URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/appoinments/{id}").buildAndExpand(new_appointment.getApmnt_id()).toUri();
+        URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/appoinments/{id}").buildAndExpand(new_appointment.getApmnt_id()).toUri();
         return ResponseEntity.created(location).build();
     }
 
@@ -39,7 +39,7 @@ public class Appointment_controller {
         Optional<Appointments> appointment_optional = appointment_repo.findById(id);
         if (appointment_optional.orElse(null) != null) {
             Appointments updated_appointment = appointment_repo.save(appointment);
-            URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/appointments/{id}").buildAndExpand(updated_appointment.getApmnt_id()).toUri();
+            URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/appointments/{id}").buildAndExpand(updated_appointment.getApmnt_id()).toUri();
             return ResponseEntity.status(204).location(location).build();
         } else {
             return ResponseEntity.badRequest().build();

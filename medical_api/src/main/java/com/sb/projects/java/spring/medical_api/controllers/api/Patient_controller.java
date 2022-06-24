@@ -11,7 +11,7 @@ import java.net.URI;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/patients")
+@RequestMapping("/api/patients")
 public class Patient_controller {
     @Autowired
     private Patient_repo patient_repo;
@@ -30,7 +30,7 @@ public class Patient_controller {
     @PostMapping(value = "/new")
     public ResponseEntity<Patients> registerNewPatient(@RequestBody Patients patient) {
         Patients saved_patient = patient_repo.save(patient);
-        URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/patients/{id}").buildAndExpand(saved_patient.getP_id()).toUri();
+        URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/patients/{id}").buildAndExpand(saved_patient.getP_id()).toUri();
         return ResponseEntity.created(location).build();
     }
 
@@ -39,7 +39,7 @@ public class Patient_controller {
         Optional<Patients> patient_optional = patient_repo.findById(id);
         if (patient_optional.orElse(null) != null) {
             Patients updated_patient=patient_repo.save(patient);
-            URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/patients/{id}").buildAndExpand(updated_patient.getP_id()).toUri();
+            URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/patients/{id}").buildAndExpand(updated_patient.getP_id()).toUri();
             return ResponseEntity.status(204).location(location).build();
         } else {
             return ResponseEntity.badRequest().build();

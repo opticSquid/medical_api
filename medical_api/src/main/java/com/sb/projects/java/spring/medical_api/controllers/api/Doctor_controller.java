@@ -11,7 +11,7 @@ import java.net.URI;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/doctors")
+@RequestMapping("/api/doctors")
 public class Doctor_controller {
     @Autowired
     private Doctor_repo doctor_repo;
@@ -36,7 +36,7 @@ public class Doctor_controller {
     @PostMapping(value = "/new")
     public ResponseEntity<Doctors> registerNewDoctor(@RequestBody Doctors doctor) {
         Doctors saved_doctor =doctor_repo.save(doctor);
-        URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/doctors/{id}").buildAndExpand(saved_doctor.getD_id()).toUri();
+        URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/doctors/{id}").buildAndExpand(saved_doctor.getD_id()).toUri();
         return ResponseEntity.created(location).build();
     }
     @PutMapping(value = "/update/{id}")
@@ -44,7 +44,7 @@ public class Doctor_controller {
         Optional<Doctors> doctor_optional = doctor_repo.findById(id);
         if (doctor_optional.orElse(null) != null) {
             Doctors updated_doctor=doctor_repo.save(doctor);
-            URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/doctors/{id}").buildAndExpand(updated_doctor.getD_id()).toUri();
+            URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/doctors/{id}").buildAndExpand(updated_doctor.getD_id()).toUri();
             return ResponseEntity.status(204).location(location).build();
         } else {
             return ResponseEntity.badRequest().build();
