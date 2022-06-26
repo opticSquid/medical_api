@@ -37,7 +37,6 @@
                     </div>
                     <form:form method="post" action="/doctors/new" modelAttribute="newDoctor">
                         <div class="modal-body">
-
                             <fieldset class="form-group mb-3">
                                 <form:label class="form-label" for="name" path="name">Name</form:label>
                                 <form:input class="form-control" id="name" type="text" name="name" path="name"
@@ -121,8 +120,8 @@
                                     <div class="col-6">${doctor.email}</div>
                                 </div>
                             </div>
-                            <a href="${pageContext.request.contextPath}/doctors/${doctor.d_id}/edit"
-                               class="btn btn-primary" role="button">
+                            <a href="${pageContext.request.contextPath}/doctors/edit/${doctor.d_id}"
+                               class="btn btn-primary">
                                 Edit <i class="bi bi-pencil"></i>
                             </a>
                         </div>

@@ -26,34 +26,35 @@ public class Doctor_REST_controller {
     public ResponseEntity<Doctors> getDoctorById(@PathVariable("id") Integer id) {
         Optional<Doctors> doctor_optional = doctor_repo.findById(id);
         Doctors doctor = doctor_optional.orElse(null);
-        if(doctor!=null) {
+        if (doctor != null) {
             return new ResponseEntity<>(doctor, HttpStatus.OK);
-        }
-        else {
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping(value = "/new")
     public ResponseEntity<Doctors> registerNewDoctor(@RequestBody Doctors doctor) {
-        Doctors saved_doctor =doctor_repo.save(doctor);
+        Doctors saved_doctor = doctor_repo.save(doctor);
         URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/doctors/{id}").buildAndExpand(saved_doctor.getD_id()).toUri();
         return ResponseEntity.created(location).build();
     }
+
     @PutMapping(value = "/update/{id}")
     public ResponseEntity<Doctors> updateDoctorDetails(@PathVariable("id") Integer id, @RequestBody Doctors doctor) {
         Optional<Doctors> doctor_optional = doctor_repo.findById(id);
         if (doctor_optional.orElse(null) != null) {
-            Doctors updated_doctor=doctor_repo.save(doctor);
+            Doctors updated_doctor = doctor_repo.save(doctor);
             URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/doctors/{id}").buildAndExpand(updated_doctor.getD_id()).toUri();
             return ResponseEntity.status(204).location(location).build();
         } else {
             return ResponseEntity.badRequest().build();
         }
     }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteDoctor(@PathVariable("id") Integer id) {
-        try{
+        try {
             doctor_repo.deleteById(id);
             return ResponseEntity.ok().build();
         } catch (Exception e) {

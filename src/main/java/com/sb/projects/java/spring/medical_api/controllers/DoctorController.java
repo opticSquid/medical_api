@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -31,6 +32,7 @@ public class DoctorController {
         List<Doctors> doctorList = doctorService.getAllDoctors(currentContextURI);
         model.put("doctors", doctorList);
         // Binding an instance of "doctors" class to the form. Initializing it below
+        // This is for the form to add doctor
         Doctors default_newDoctor = new Doctors();
         default_newDoctor.setName("");
         default_newDoctor.setEmail("");
@@ -47,13 +49,37 @@ public class DoctorController {
             Boolean created = doctorService.addNewDoctor(getCurrentContextURI(request), doctor);
             model.put("newDoctorpopUp_hidden", "block");
             if (created) {
-                model.put("toast_message_body","New Doctor Added to the database");
-                model.put("toast_message_title","Doctor Added");
+                model.put("toast_message_body", "New Doctor Added to the database");
+                model.put("toast_message_title", "Doctor Added");
             } else {
-                model.put("toast_message_body","New Doctor could not be added");
-                model.put("toast_message_title","Try Again");
+                model.put("toast_message_body", "New Doctor could not be added");
+                model.put("toast_message_title", "Try Again");
             }
         }
         return "redirect:/doctors";
     }
+
+    @RequestMapping(value = "/doctors/edit/{id}", method = RequestMethod.GET)
+    public String editDoctorDetails(@PathVariable("id") Integer id, HttpServletRequest request, ModelMap model) {
+        Doctors doctor_2B_edited = doctorService.fetchDoctorDetailsbyId(id, getCurrentContextURI(request));
+        model.put("title", "Edit Doctor Details");
+        model.put("doctor_edit", doctor_2B_edited);
+        //Required to set it explicitly otherwise it gets set to 0
+        doctor_2B_edited.setD_id(id);
+        return "edit_doctor";
+    }
+
+    @RequestMapping(value = "/doctors/edit/{id}/save", method = RequestMethod.POST)
+    public String submitEditedDoctorDetails(@PathVariable("id") Integer id, HttpServletRequest request, @Valid Doctors doctor, BindingResult result) {
+        if (result.hasErrors()) {
+            return "redirect:/doctors/edit/" + doctor.getD_id();
+        }
+        // Again setting it explicitly otherwise gets set to 0
+        doctor.setD_id(id);
+        Boolean edit_success = doctorService.editDoctorDetails(doctor, getCurrentContextURI(request));
+        System.out.println("Edit Status: " + edit_success);
+        //TODO: Need to alert user visually when edit was not successful
+        return edit_success ? "redirect:/doctors" : "redirect:/doctors/edit/" + doctor.getD_id();
+    }
 }
+

@@ -27,7 +27,7 @@ public class DoctorService {
     public List<Doctors> getAllDoctors(String currentContext) {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        HttpEntity<String> entity = new HttpEntity<String>(headers);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
         String JsonString = restTemplate.exchange(currentContext + url, HttpMethod.GET, entity, String.class).getBody();
         List<Doctors> doctorsList;
         try {
@@ -44,10 +44,21 @@ public class DoctorService {
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         HttpEntity<Doctors> entity = new HttpEntity<>(doctor, headers);
         ResponseEntity<String> response = this.restTemplate.exchange(currentContext + url + "/new", HttpMethod.POST, entity, String.class);
-        if (response.getStatusCodeValue() != 201) {
-            return false;
-        } else {
-            return true;
-        }
+        return response.getStatusCodeValue() == 201;
+    }
+
+    public Doctors fetchDoctorDetailsbyId(Integer id, String currentContext) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        return restTemplate.getForObject(currentContext + url + "/" + id.toString(), Doctors.class);
+    }
+
+    public Boolean editDoctorDetails(Doctors doctor, String currentContext) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        HttpEntity<Doctors> entity = new HttpEntity<>(doctor, headers);
+        ResponseEntity<String> response = this.restTemplate.exchange(currentContext + url + "/update/" + doctor.getD_id(), HttpMethod.PUT, entity, String.class);
+        return response.getStatusCodeValue() == 204;
     }
 }
