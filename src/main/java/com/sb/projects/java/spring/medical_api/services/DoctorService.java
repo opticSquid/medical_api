@@ -9,6 +9,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -47,10 +48,32 @@ public class DoctorService {
         return response.getStatusCodeValue() == 201;
     }
 
-    public Doctors fetchDoctorDetailsbyId(Integer id, String currentContext) {
+    public Doctors fetchDoctorDetailsById(Integer id, String currentContext) {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        return restTemplate.getForObject(currentContext + url + "/" + id.toString(), Doctors.class);
+        return restTemplate.getForObject(currentContext + url + "/id/" + id.toString(), Doctors.class);
+    }
+
+    public List<Doctors> fetchDoctorDetailsByName(String name, String currentContext) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        ResponseEntity<Doctors[]> doctors_list_response = restTemplate.getForEntity(currentContext + url + "/name/" + name, Doctors[].class);
+        if (doctors_list_response.getBody() != null) {
+            return Arrays.asList(doctors_list_response.getBody());
+        } else {
+            return null;
+        }
+    }
+
+    public List<Doctors> fetchDoctorDetailsBySpecialization(String specz, String currentContext) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        ResponseEntity<Doctors[]> doctors_list_response = restTemplate.getForEntity(currentContext + url + "/specz/" + specz, Doctors[].class);
+        if (doctors_list_response.getBody() != null) {
+            return Arrays.asList(doctors_list_response.getBody());
+        } else {
+            return null;
+        }
     }
 
     public Boolean editDoctorDetails(Doctors doctor, String currentContext) {

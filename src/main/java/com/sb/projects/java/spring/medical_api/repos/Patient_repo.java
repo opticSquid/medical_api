@@ -1,7 +1,7 @@
 package com.sb.projects.java.spring.medical_api.repos;
 
 import com.sb.projects.java.spring.medical_api.entities.Patients;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface Patient_repo extends CrudRepository<Patients, Integer> {
+public interface Patient_repo extends JpaRepository<Patients, Integer> {
 }

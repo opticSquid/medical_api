@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -22,10 +23,31 @@ public class Doctor_REST_controller {
         return doctor_repo.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<Doctors> getDoctorById(@PathVariable("id") Integer id) {
         Optional<Doctors> doctor_optional = doctor_repo.findById(id);
         Doctors doctor = doctor_optional.orElse(null);
+        if (doctor != null) {
+            return new ResponseEntity<>(doctor, HttpStatus.OK);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Iterable<Doctors>> getDoctorByName(@PathVariable("name") String name) {
+        Optional<List<Doctors>> doctor_optional = doctor_repo.findByName(name);
+        List<Doctors> doctor = doctor_optional.orElse(null);
+        if (doctor != null) {
+            return new ResponseEntity<>(doctor, HttpStatus.OK);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @GetMapping("/specz/{specz}")
+    public ResponseEntity<Iterable<Doctors>> getDoctorBySpecialization(@PathVariable("specz") String specz) {
+        Optional<List<Doctors>> doctor_optional = doctor_repo.findBySpecialization(specz);
+        List<Doctors> doctor = doctor_optional.orElse(null);
         if (doctor != null) {
             return new ResponseEntity<>(doctor, HttpStatus.OK);
         } else {

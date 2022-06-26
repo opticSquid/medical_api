@@ -35,7 +35,7 @@
                         <h5 class="modal-title" id="newDoctorModalLabel">New Doctor</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form:form method="post" action="/doctors/new" modelAttribute="newDoctor">
+                    <form:form method="post" action="${pageContext.request.contextPath}/doctors/new" modelAttribute="newDoctor">
                         <div class="modal-body">
                             <fieldset class="form-group mb-3">
                                 <form:label class="form-label" for="name" path="name">Name</form:label>
@@ -77,17 +77,17 @@
         <div class="row">
             <div class="col-12">
                 <form class="input-group input-group-lg" method="post"
-                      action="${pageContext.request.contextPath}/search">
+                      action="${pageContext.request.contextPath}/doctors/search" id="search_from">
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false" style="border-top-left-radius:15px; border-bottom-left-radius: 15px;">Search By
+                            aria-expanded="false" style="border-top-left-radius:15px; border-bottom-left-radius: 15px;" id="search_cat">Search By
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">ID</a></li>
-                        <li><a class="dropdown-item" href="#">Name</a></li>
-                        <li><a class="dropdown-item" href="#">Specialization</a></li>
+                        <li><div class="dropdown-item" id="id" aria-selected="true">ID</div></li>
+                        <li><div class="dropdown-item" id="doc_name">Name</div></li>
+                        <li><div class="dropdown-item" id="spec">Specialization</div></li>
                     </ul>
                     <input type="text" class="form-control" aria-label="Sizing example input"
-                           aria-describedby="inputGroup-sizing-lg" placeholder="search doctor">
+                           aria-describedby="inputGroup-sizing-lg" placeholder="search doctor" name="query">
                     <button class="btn btn-primary" type="submit" style="border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
                         <i class="bi bi-search"></i>
                     </button>
@@ -144,5 +144,6 @@
         </div>
     </div>
 </main>
+<script src="${pageContext.request.contextPath}/doctor_Search.js"></script>
 <%@include file="commons/foorter.jspf" %>
 </html>

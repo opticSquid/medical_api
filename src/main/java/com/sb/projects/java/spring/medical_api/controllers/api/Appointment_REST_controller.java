@@ -22,7 +22,7 @@ public class Appointment_REST_controller {
         return appointment_repo.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<Appointments> getAppointmentById(@PathVariable("id") Integer id) {
         Optional<Appointments> appointments_Optional = appointment_repo.findById(id);
         Appointments appointment =appointments_Optional.orElse(null);

@@ -22,7 +22,7 @@ public class Patient_REST_controller {
         return patient_repo.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<Patients> getPatientsById(@PathVariable("id") Integer id) {
         Optional<Patients> patient_optional = patient_repo.findById(id);
         Patients patient=patient_optional.orElse(null);
