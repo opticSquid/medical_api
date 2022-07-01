@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -26,6 +27,28 @@ public class Patient_REST_controller {
     public ResponseEntity<Patients> getPatientsById(@PathVariable("id") Integer id) {
         Optional<Patients> patient_optional = patient_repo.findById(id);
         Patients patient=patient_optional.orElse(null);
+        if(patient!=null) {
+            return new ResponseEntity<>(patient, HttpStatus.OK);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Iterable<Patients>> getPatientsByName(@PathVariable("name") String name) {
+        Optional<List<Patients>> patient_optional = patient_repo.findByName(name);
+        List<Patients> patient = patient_optional.orElse(null);
+        if(patient!=null) {
+            return new ResponseEntity<>(patient, HttpStatus.OK);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<Patients> getPatientsByEmail(@PathVariable("email") String email) {
+        Optional<Patients> patient_optional = patient_repo.findByEmail(email);
+        Patients patient = patient_optional.orElse(null);
         if(patient!=null) {
             return new ResponseEntity<>(patient, HttpStatus.OK);
         } else {

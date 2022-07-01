@@ -85,7 +85,7 @@
                             <div class="dropdown-item" id="patient_name">Name</div>
                         </li>
                         <li>
-                            <div class="dropdown-item" id="email">Email</div>
+                            <div class="dropdown-item" id="patient_email">Email</div>
                         </li>
                     </ul>
                     <input type="text" class="form-control" aria-label="Sizing example input"
@@ -123,7 +123,7 @@
                                     <div class="col-6">${patient.email}</div>
                                 </div>
                             </div>
-                            <a href="${pageContext.request.contextPath}/doctors/edit/${patient.p_id}"
+                            <a href="${pageContext.request.contextPath}/patients/edit/${patient.p_id}"
                                class="btn btn-primary">
                                 Edit <i class="bi bi-pencil"></i>
                             </a>
