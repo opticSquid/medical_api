@@ -27,7 +27,7 @@ public class DoctorController {
     }
 
     @RequestMapping(value = "/doctors", method = RequestMethod.GET)
-    public String doctorController(HttpServletRequest request, ModelMap model) {
+    public String showAllDoctors(HttpServletRequest request, ModelMap model) {
         model.put("title", "Doctors");
         // Returns http://localhost:8080 in an URI like http://localhost:8080/x/y/z
         String currentContextURI = getCurrentContextURI(request);
