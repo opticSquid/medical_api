@@ -21,21 +21,24 @@
                        data-bs-toggle="dropdown" aria-expanded="false">
                         Dropdown link
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="#">Action</a></li>
                         <li><a class="dropdown-item" href="#">Another action</a></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
-                <li class="nav item dropdown">
+                <li class="nav-item dropdown">
                     <button class="btn btn-primary" id="languageDropDown" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                        <ul class="dropdown-menu" aria-labelledby="languageDropDown">
-                            <li><a class="dropdown-item"
-                                   href="${pageContext.request.contextPath}/?myLocale=en">English</a></li>
-                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/?myLocale=de">German</a></li>
-                        </ul>
+                            aria-expanded="false">Language
                     </button>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="languageDropDown">
+                        <li>
+                            <a class="dropdown-item btn btn-dark" id="lang_en" role="button">English</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item btn btn-dark" id="lang_de" role="button">German</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
