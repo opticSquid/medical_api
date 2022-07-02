@@ -5,7 +5,7 @@
   Time: 4:04 PM
   To change this template use File | Settings | File Templates.
 --%>
-
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <html>
 <%@include file="commons/head.jspf" %>
 <%@include file="commons/navbar.jspf" %>
@@ -15,11 +15,8 @@
         <div class="row p-5 mt-4 mb-4 bg-light rounded-3" id="jumbotron">
             <div class="container-fluid py-5">
                 <h1 class="display-5 fw-bold text-primary">CLINIC ++</h1>
-                <p class="col-md-12 fs-4 text-white">Makes your clinic management easy as breeze. Beside this front end
-                    application, our application exposes RESTful APIs using which you can extend their functionality
-                    in your own way. These APIs respond with both modern <span class="text-warning">JSON</span> and
-                    legacy <span class="text-warning">XML</span> objects on the basis of the
-                    value of <strong>Accept</strong> request header you provide.
+                <p class="col-md-12 fs-4 text-white">
+                    <spring:message code="home.description"/>
                 </p>
                 <a role="button" class="btn btn-primary btn-lg" href="/doctors" style="text-decoration: none;">Get
                     Started
