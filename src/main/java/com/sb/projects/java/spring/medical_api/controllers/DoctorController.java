@@ -120,5 +120,11 @@ public class DoctorController {
         model.put("DoctorpopUp_hidden", "none");
         return "doctors";
     }
+
+    @RequestMapping(value = "/doctors/delete/{d_id}", method = RequestMethod.GET)
+    public String deleteDoctor(@PathVariable("d_id") Integer d_id, HttpServletRequest request) {
+        doctorService.deleteDoctor(d_id, getCurrentContextURI(request));
+        return "redirect:/doctors";
+    }
 }
 

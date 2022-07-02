@@ -123,10 +123,16 @@
                                     <div class="col-6">${patient.email}</div>
                                 </div>
                             </div>
-                            <a href="${pageContext.request.contextPath}/patients/edit/${patient.p_id}"
-                               class="btn btn-primary">
-                                Edit <i class="bi bi-pencil"></i>
-                            </a>
+                            <div class="text-center mt-1 mb-1">
+                                <a href="${pageContext.request.contextPath}/patients/edit/${patient.p_id}"
+                                   class="btn btn-outline-primary ms-2">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a href="${pageContext.request.contextPath}/patients/delete/${patient.p_id}"
+                                   class="btn btn-danger ms-2" role="button">
+                                    <i class="bi bi-trash3"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

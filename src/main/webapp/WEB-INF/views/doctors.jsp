@@ -42,7 +42,7 @@
                         <div class="modal-body">
                             <fieldset class="form-group mb-3">
                                 <form:label class="form-label" for="name" path="name">
-                                    <spring:message code="doctors.modal.name" />
+                                    <spring:message code="doctors.modal.name"/>
                                 </form:label>
                                 <form:input class="form-control" id="name" type="text" name="name" path="name"
                                             required="required"/>
@@ -50,7 +50,7 @@
                             </fieldset>
                             <fieldset class="form-group mb-3">
                                 <form:label class="form-label" for="email" path="email">
-                                    <spring:message code="doctors.modal.email" />
+                                    <spring:message code="doctors.modal.email"/>
                                 </form:label>
                                 <form:input class="form-control" id="email" type="email" name="email" path="email"
                                             required="required"/>
@@ -58,7 +58,7 @@
                             </fieldset>
                             <fieldset class="form-group mb-3">
                                 <form:label class="form-label" for="degree" path="degree">
-                                    <spring:message code="doctors.modal.degree" />
+                                    <spring:message code="doctors.modal.degree"/>
                                 </form:label>
                                 <form:input class="form-control" id="degree" type="text" name="degree" path="degree"
                                             required="required"/>
@@ -67,7 +67,7 @@
                             <fieldset class="form-group mb-3">
                                 <form:label class="form-label" for="specz"
                                             path="specialization">
-                                    <spring:message code="doctors.modal.specz" />
+                                    <spring:message code="doctors.modal.specz"/>
                                 </form:label>
                                 <form:input class="form-control" id="specz" type="text" name="specialization"
                                             path="specialization" required="required"/>
@@ -77,10 +77,10 @@
                         </div>
                         <div class="modal-footer">
                             <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                <spring:message code="doctors.modal.close" />
+                                <spring:message code="doctors.modal.close"/>
                             </button>
                             <button type="submit" class="btn btn-primary" id="triggerToast">
-                                <spring:message code="doctors.modal.add" />
+                                <spring:message code="doctors.modal.add"/>
                             </button>
                         </div>
                     </form:form>
@@ -95,7 +95,7 @@
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false" style="border-top-left-radius:15px; border-bottom-left-radius: 15px;"
                             id="search_cat">
-                        <spring:message code="doctors.search.filterBy" />
+                        <spring:message code="doctors.search.filterBy"/>
                     </button>
                     <ul class="dropdown-menu">
                         <li>
@@ -110,7 +110,7 @@
                         </li>
                         <li>
                             <div class="dropdown-item" id="spec">
-                                <spring:message code="doctors.search.filter_Specz" />
+                                <spring:message code="doctors.search.filter_Specz"/>
                             </div>
                         </li>
                     </ul>
@@ -125,7 +125,7 @@
         </div>
         <div class="row-cols-12 text-center">
             <h1 class="text-primary">
-                <spring:message code="doctors.title" />
+                <spring:message code="doctors.title"/>
             </h1>
         </div>
         <div class="row">
@@ -138,7 +138,7 @@
                             <div class="container card-text">
                                 <div class="row">
                                     <div class="col-6 fw-bold">
-                                        <spring:message code="doctors.details.id" />
+                                        <spring:message code="doctors.details.id"/>
                                     </div>
                                     <div class="col-6">${doctor.d_id}</div>
                                 </div>
@@ -152,7 +152,7 @@
                                 <hr/>
                                 <div class="row">
                                     <div class="col-6 fw-bold">
-                                        <spring:message code="doctor.details.specz" />
+                                        <spring:message code="doctor.details.specz"/>
                                     </div>
                                     <div class="col-6">${doctor.specialization}</div>
                                 </div>
@@ -164,10 +164,16 @@
                                     <div class="col-6">${doctor.email}</div>
                                 </div>
                             </div>
-                            <a href="${pageContext.request.contextPath}/doctors/edit/${doctor.d_id}"
-                               class="btn btn-primary">
-                                Edit <i class="bi bi-pencil"></i>
-                            </a>
+                            <div class="text-center mt-1 mb-1">
+                                <a href="${pageContext.request.contextPath}/doctors/edit/${doctor.d_id}"
+                                   class="btn btn-outline-primary ms-2" role="button">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a href="${pageContext.request.contextPath}/doctors/delete/${doctor.d_id}"
+                                   class="btn btn-danger ms-2" role="button">
+                                    <i class="bi bi-trash3"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

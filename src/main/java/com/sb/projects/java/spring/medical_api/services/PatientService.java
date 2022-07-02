@@ -62,4 +62,9 @@ public class PatientService {
         ResponseEntity<String> response = this.restTemplate.exchange(currentContext + url + "/update/" + patient.getP_id(), HttpMethod.PUT, entity, String.class);
         return response.getStatusCodeValue() == 204;
     }
+    public void deletePatient(Integer id, String currentContext) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        restTemplate.delete(currentContext+url+"/delete/"+id);
+    }
 }

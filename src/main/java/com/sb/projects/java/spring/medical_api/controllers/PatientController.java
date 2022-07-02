@@ -114,4 +114,9 @@ public class PatientController {
         model.put("patientpopUp_hidden", "none");
         return "patients";
     }
+    @RequestMapping(value = "/patients/delete/{p_id}", method = RequestMethod.GET)
+    public String deletePatient(@PathVariable("p_id") Integer p_id, HttpServletRequest request) {
+        patientService.deletePatient(p_id, getCurrentContextURI(request));
+        return "redirect:/patients";
+    }
 }

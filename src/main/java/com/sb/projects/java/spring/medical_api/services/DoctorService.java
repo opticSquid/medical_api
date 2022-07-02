@@ -84,4 +84,10 @@ public class DoctorService {
         ResponseEntity<String> response = this.restTemplate.exchange(currentContext + url + "/update/" + doctor.getD_id(), HttpMethod.PUT, entity, String.class);
         return response.getStatusCodeValue() == 204;
     }
+
+    public void deleteDoctor(Integer id, String currentContext) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        restTemplate.delete(currentContext+url+"/delete/"+id);
+    }
 }
