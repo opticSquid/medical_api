@@ -5,7 +5,7 @@
   Time: 4:04 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <html>
 <%@include file="commons/head.jspf" %>
 <%@include file="commons/navbar.jspf" %>
@@ -18,18 +18,15 @@
                 <p class="col-md-12 fs-4 text-white">
                     <spring:message code="home.description"/>
                 </p>
-                <a role="button" class="btn btn-primary btn-lg" href="/doctors" style="text-decoration: none;">Get
-                    Started
+                <a role="button" class="btn btn-primary btn-lg" href="/doctors" style="text-decoration: none;">
+                    <spring:message code="home.get-started"/>
                     <i class="bi bi-arrow-right"></i>
                 </a>
             </div>
         </div>
         <div class="row">
             <div class="col-12 text-center fs-4">
-                All the API are exposed in the route: <a href="http://localhost:8080/api">http://(your
-                local host port 8080 or your cloud service URI)/api</a> route. All the below mentioned API end points
-                will
-                assume your context path is <a href="http://localhost:8080">http://localhost:8080/api</a> route
+                <spring:message code="home.declaration"/>
                 <table class="table">
                     <thead>
                     <tr>
@@ -52,7 +49,7 @@
         </div>
         <div class="row">
             <div class="col-12 fw-bolder text-primary text-center fs-5">
-                ENDPOINTS
+                <spring:message code="home.endpoints" />
             </div>
         </div>
         <div class="mt-2 accordion" id="EndpointAccordion">
@@ -68,7 +65,9 @@
                     <div class="accordion-body container">
                         <div class="row">
                             <div class="col-sm-6 col-12 fw-bold">Description</div>
-                            <div class="col-sm-6 col-12">Returns list of all doctors present in the DB</div>
+                            <div class="col-sm-6 col-12">
+                                <spring:message code="home.endpoints.Alldoctors" />
+                            </div>
                         </div>
                         <hr/>
                         <div class="row">

@@ -33,10 +33,10 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="languageDropDown">
                         <li>
-                            <a class="dropdown-item btn btn-dark" id="lang_en" role="button">English</a>
+                            <button class="dropdown-item btn btn-dark" id="lang_en">English</button>
                         </li>
                         <li>
-                            <a class="dropdown-item btn btn-dark" id="lang_de" role="button">German</a>
+                            <button class="dropdown-item btn btn-dark" id="lang_de">German</button>
                         </li>
                     </ul>
                 </li>
