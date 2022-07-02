@@ -1,6 +1,5 @@
 package com.sb.projects.java.spring.medical_api.controllers;
 
-import com.sb.projects.java.spring.medical_api.entities.Doctors;
 import com.sb.projects.java.spring.medical_api.entities.Patients;
 import com.sb.projects.java.spring.medical_api.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +55,7 @@ public class PatientController {
         }
         return "redirect:/patients";
     }
+
     @RequestMapping(value = "/patients/edit/{id}", method = RequestMethod.GET)
     public String editPatientDetails(@PathVariable("id") Integer id, HttpServletRequest request, ModelMap model) {
         Patients patient_2B_edited = patientService.fetchPatientDetailsById(id, getCurrentContextURI(request));
@@ -65,6 +65,7 @@ public class PatientController {
         patient_2B_edited.setP_id(id);
         return "edit_patient";
     }
+
     @RequestMapping(value = "/patients/edit/{id}/save", method = RequestMethod.POST)
     public String submitEditedPatientDetails(@PathVariable("id") Integer id, HttpServletRequest request, @Valid Patients patient, BindingResult result) {
         if (result.hasErrors()) {
@@ -83,17 +84,18 @@ public class PatientController {
         model.clear();
         model.put("title", "Patients");
         switch (by) {
-            case "id": try {
-                Integer id = Integer.parseInt(query);
-                Patients patient = patientService.fetchPatientDetailsById(id, getCurrentContextURI(request));
-                List<Patients> patients_list_id = new ArrayList<>();
-                patients_list_id.add(patient);
-                System.out.println("Patient found: " + patients_list_id);
-                model.put("patients", patients_list_id);
-            } catch (NumberFormatException e) {
-                System.out.println("Patient found: " + null);
-                model.put("patients", null);
-            }
+            case "id":
+                try {
+                    Integer id = Integer.parseInt(query);
+                    Patients patient = patientService.fetchPatientDetailsById(id, getCurrentContextURI(request));
+                    List<Patients> patients_list_id = new ArrayList<>();
+                    patients_list_id.add(patient);
+                    System.out.println("Patient found: " + patients_list_id);
+                    model.put("patients", patients_list_id);
+                } catch (NumberFormatException e) {
+                    System.out.println("Patient found: " + null);
+                    model.put("patients", null);
+                }
                 break;
             case "email":
                 Patients patient = patientService.fetchPatientDetailsByEmail(query, getCurrentContextURI(request));
